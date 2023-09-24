@@ -4,11 +4,11 @@ public class SavingsAccount extends Account{
 	
 	private double interest;
 
-	public SavingsAccount (int a, double interest) 
+	public SavingsAccount (int a) 
 	{
 		
 		super(a);
-		this.interest = interest;
+		this.interest = 0.1;
 		
 	}
 	

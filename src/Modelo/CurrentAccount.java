@@ -4,13 +4,20 @@ public class CurrentAccount extends Account{
 	
 	private double overdraftLimit;
 	
-	public CurrentAccount (int a, double overdraftLimit) 
+	public CurrentAccount (int a) 
 	{
 		
 		super(a);
-		this.overdraftLimit = overdraftLimit;
+		this.overdraftLimit = 1000;
 		
 	}
+	
+	/*public void deposit (double sum) 
+	{
+		
+		
+		
+	}*/
 	
 	public void withdraw (double sum) 
 	{
