@@ -8,16 +8,23 @@ public class CurrentAccount extends Account{
 	{
 		
 		super(a);
-		this.overdraftLimit = 1000;
+		this.overdraftLimit = 100;
 		
 	}
 	
-	/*public void deposit (double sum) 
+	public void deposit (double sum) 
 	{
 		
+		if (this.getBalance() + sum >= 0) 
+		{
+			
+			this.overdraftLimit = 100;
+			
+		}
 		
+		super.deposit(sum);
 		
-	}*/
+	}
 	
 	public void withdraw (double sum) 
 	{
@@ -31,13 +38,13 @@ public class CurrentAccount extends Account{
 				super.withdraw(sum);
 				
 				
-			}else 
+			}/*else 
 			
 			{
 				
 				System.err.println("Account.withdraw(...): " + "The withdrawal exceeds the current balance plus the overdraft limit");
 				
-			}
+			}*/
 			
 			
 		}else 
@@ -50,13 +57,13 @@ public class CurrentAccount extends Account{
 				this.overdraftLimit -= sum;
 				super.withdraw(sum);
 				
-			}else 
+			}/*else 
 				
 			{
 				
 				System.err.println("Account.withdraw(...): " + "Withdrawal exceeds overdraft limit");
 				
-			}	
+			}*/	
 			
 		}
 		

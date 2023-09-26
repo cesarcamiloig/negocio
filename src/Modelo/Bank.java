@@ -6,14 +6,14 @@ public class Bank {
 
 	private ArrayList<Account> accounts;
 	
-	public Bank () 
+	public Bank (ArrayList<Account> accounts) 
 	{
 		
 		this.setAccounts(new ArrayList<Account>());
 		
 	}
 	
-	public void deposit (int accountNumber, double sum) 
+	public void payDividend/*deposit*/ (int accountNumber, double sum) 
 	{
 		
 		for (int i = 0; i < this.accounts.size(); i++) 
@@ -30,7 +30,7 @@ public class Bank {
 		
 	}
 
-	public void withdraw (int accountNumber, double sum) 
+	public void withdrawAccount/*withdraw*/ (int accountNumber, double sum) 
 	{
 		
 		for (int i = 0; i < this.accounts.size(); i++) 
@@ -69,7 +69,7 @@ public class Bank {
 		
 	}
 	
-	public void accountInOverdraft () 
+	public void sendLetterToOverdraftAccounts/*accountInOverdraft*/ () 
 	{
 		
 		System.out.println("The following account numbers are overdraft: ");
@@ -108,13 +108,13 @@ public class Bank {
 				
 			}
 			
-		}else 
+		}/*else 
 		
 		{
 			
 			System.err.println("Bank.openAccount(...): " + "The account type is invalid.");
 			
-		}
+		}*/
 		
 	}
 	
