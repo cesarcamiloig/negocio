@@ -4,16 +4,17 @@ import java.util.*;
 
 public class Bank {
 
+	private static Bank instance;
 	private ArrayList<Account> accounts;
 	
-	public Bank (ArrayList<Account> accounts) 
+	private Bank () 
 	{
 		
-		this.setAccounts(new ArrayList<Account>());
+		this.accounts = new ArrayList<Account>();
 		
 	}
 	
-	public void payDividend/*deposit*/ (int accountNumber, double sum) 
+	public void deposit (int accountNumber, double sum) 
 	{
 		
 		for (int i = 0; i < this.accounts.size(); i++) 
@@ -28,9 +29,16 @@ public class Bank {
 			
 		}
 		
+		if (this.getIndex(accountNumber) == -1) 
+		{
+			
+			System.err.println("Bank.deposit(...): " + "There is no account with that number.");
+			
+		}
+		
 	}
 
-	public void withdrawAccount/*withdraw*/ (int accountNumber, double sum) 
+	public void withdraw (int accountNumber, double sum) 
 	{
 		
 		for (int i = 0; i < this.accounts.size(); i++) 
@@ -42,6 +50,13 @@ public class Bank {
 				this.accounts.get(i).withdraw(sum);
 				
 			}
+			
+		}
+		
+		if (this.getIndex(accountNumber) == -1) 
+		{
+			
+			System.err.println("Bank.withdraw(...): " + "There is no account with that number.");
 			
 		}
 		
@@ -65,11 +80,18 @@ public class Bank {
 			
 		}
 		
+		if (this.getIndex(accountNumber) == -1) 
+		{
+			
+			System.err.println("Bank.getBalance(...): " + "There is no account with that number.");
+			
+		}
+		
 		return bal;
 		
 	}
 	
-	public void sendLetterToOverdraftAccounts/*accountInOverdraft*/ () 
+	public void accountInOverdraft () 
 	{
 		
 		System.out.println("The following account numbers are overdraft: ");
@@ -91,7 +113,7 @@ public class Bank {
 	public void openAccount (char accountType, int accountNumber) 
 	{
 		
-		if (accountType == 'A' || accountType == 'C') 
+		if ((accountType == 'A' || accountType == 'C') && this.getIndex(accountNumber) == -1) 
 		{
 		
 			if (accountType == 'A') 
@@ -108,18 +130,27 @@ public class Bank {
 				
 			}
 			
-		}/*else 
+			System.out.println("Successfully opened account");
+			
+		}else 
 		
 		{
 			
-			System.err.println("Bank.openAccount(...): " + "The account type is invalid.");
+			System.err.println("Bank.openAccount(...): " + "The account type is invalid or the account already exists.");
 			
-		}*/
+		}
 		
 	}
 	
 	public void closeAccount (int accountNumber) 
 	{
+		
+		if (this.getIndex(accountNumber) == -1) 
+		{
+			
+			System.err.println("Bank.closeAccount(...): " + "There is no account with that number.");
+			
+		}
 		
 		for (int i = 0; i < this.accounts.size(); i++) 
 		{
@@ -133,6 +164,41 @@ public class Bank {
 			}
 			
 		}
+		
+	}
+	
+	private int getIndex (int accountNumber) 
+	{
+		
+		int index = -1;
+		
+		for (int i = 0; i < this.accounts.size(); i++) 
+		{
+			
+			if (this.accounts.get(i).getAccountNumber() == accountNumber) 
+			{
+				
+				index = i;
+				
+			}
+			
+		}
+		
+		return index;
+		
+	}
+	
+	public static Bank getInstance () 
+	{
+		
+		if (instance == null) 
+		{
+			
+			instance = new Bank();
+			
+		}
+		
+		return instance;
 		
 	}
 
