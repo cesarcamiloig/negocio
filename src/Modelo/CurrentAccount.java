@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public class CurrentAccount extends Account{
 	
@@ -18,7 +18,7 @@ public class CurrentAccount extends Account{
 		if (this.getBalance() + sum >= 0) 
 		{
 			
-			this.overdraftLimit = 100;
+			this.overdraftLimit = 1000;
 			
 		}
 		
@@ -34,7 +34,21 @@ public class CurrentAccount extends Account{
 			
 			if ((this.getBalance() + this.overdraftLimit) - sum >= 0) 
 			{
-				this.overdraftLimit -= this.getBalance() - sum < 0 ? this.getBalance() - sum: 0;
+				//this.overdraftLimit -= this.getBalance() - sum < 0 ? this.getBalance() - sum: 0;
+
+				if (this.getBalance() - sum < 0) 
+				{
+
+					this.overdraftLimit = this.overdraftLimit + (this.getBalance() - sum);
+
+				}
+				else
+
+				{
+
+
+
+				}
 				super.withdraw(sum);
 				
 				
@@ -42,7 +56,7 @@ public class CurrentAccount extends Account{
 			
 			{
 				
-				System.err.println("Account.withdraw(...): " + "The withdrawal exceeds the current balance plus the overdraft limit");
+				System.err.println("Account.withdraw(...): " + "the withdrawal exceeds the current balance plus the overdraft limit.");
 				
 			}
 			
@@ -61,7 +75,7 @@ public class CurrentAccount extends Account{
 				
 			{
 				
-				System.err.println("Account.withdraw(...): " + "Withdrawal exceeds overdraft limit");
+				System.err.println("Account.withdraw(...): " + "withdrawal exceeds overdraft limit.");
 				
 			}	
 			
