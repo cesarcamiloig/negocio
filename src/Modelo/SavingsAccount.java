@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public class SavingsAccount extends Account{
 	
@@ -18,6 +18,24 @@ public class SavingsAccount extends Account{
 		sum += (this.getBalance() * this.interest);
 		super.deposit(sum);
 		
+	}
+
+	public void withdraw (double sum) 
+	{
+
+		if (this.getBalance() - sum >= 0) 
+		{
+
+			super.withdraw(sum);
+
+		} else 
+
+		{
+
+			System.err.println("Account.withdraw(...): " + "withdrawal exceeds account balance.");
+			
+		}
+
 	}
 
 	public void addInterest(double interest) 
