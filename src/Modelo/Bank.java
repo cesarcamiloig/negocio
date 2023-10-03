@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 import java.util.*;
 
@@ -113,7 +113,7 @@ public class Bank {
 	public void openAccount (char accountType, int accountNumber) 
 	{
 		
-		if ((accountType == 'A' || accountType == 'C') && this.getIndex(accountNumber) == -1) 
+		if ((accountType == 'A' || accountType == 'C' || accountType == 'T') && this.getIndex(accountNumber) == -1) 
 		{
 		
 			if (accountType == 'A') 
@@ -127,6 +127,13 @@ public class Bank {
 			{
 				
 				this.accounts.add(new CurrentAccount(accountNumber));
+				
+			}
+
+			if (accountType == 'T') 
+			{
+				
+				this.accounts.add(new CDT(accountNumber));
 				
 			}
 			
@@ -186,6 +193,42 @@ public class Bank {
 		
 		return index;
 		
+	}
+
+	public Account getAccount (int accountNumber) 
+	{
+
+		for (int i = 0; i < this.accounts.size(); i++) 
+		{
+
+			if (this.accounts.get(i).getAccountNumber() == accountNumber) {
+
+				return this.accounts.get(i);
+
+			}
+
+		}
+		return null;
+
+	}
+
+	public void estimatedBalanceCDTAccounts (int days) 
+	{
+
+		System.out.println("The estimated balance for the following CDT accounts is: ");
+		
+		for (int i = 0; i < this.accounts.size(); i++) 
+		{
+			
+			if (this.accounts.get(i) instanceof CDT) 
+			{
+				int accountNumber = this.accounts.get(i).getAccountNumber();
+				System.out.println("La cuenta de numero " + accountNumber + ", tiene una rentabilidad estimada de: " + ((CDT)getAccount(accountNumber)).calculateProfitability(days));
+				
+			}
+			
+		}
+
 	}
 	
 	public static Bank getInstance () 
