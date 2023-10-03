@@ -1,262 +1,237 @@
-package modelo;
+package vista;
 
 import java.util.*;
 
-public class Bank {
+import modelo.Bank;
+import modelo.CDT;
+//import Modelo.Account;
+//import modelo.CurrentAccount;
 
-	private static Bank instance;
-	private ArrayList<Account> accounts;
-	
-	private Bank () 
+public class BankClient {
+
+	public static void main (String []args) 
 	{
 		
-		this.accounts = new ArrayList<Account>();
+		Bank bank = Bank.getInstance();
 		
-	}
-	
-	public void deposit (int accountNumber, double sum) 
-	{
+		Scanner entrada = new Scanner(System.in);
 		
-		for (int i = 0; i < this.accounts.size(); i++) 
-		{
+		System.out.println("********************************");
+		System.out.println("*Bienvenido al sistema de banco*");
+		System.out.println("********************************");
+		
+		System.out.println("");
+		
+		System.out.println("Por favor digite el numero de la opcion que desea realizar:");
+		System.out.println("1. Abrir una cuenta de banco");
+		System.out.println("2. Cerrar una cuenta de banco");
+		System.out.println("3. Realizar un deposito");
+		System.out.println("4. Realizar un retiro");
+		System.out.println("5. Obtener balance de una cuenta");
+		System.out.println("6. Conocer que cuentas se encuentran en sobregiro");
+		System.out.println("7. Calcular rentabilidad (solo cuenta CDT).");
+		System.out.println("8. Calcular rentabilidad de todas las cuentas CDT.");
+		
+		try {
+		
+			int numero = entrada.nextInt();
 			
-			if (this.accounts.get(i).getAccountNumber() == accountNumber) 
+			boolean parar = false;
+			
+			while (parar == false)
+				
 			{
-				
-				this.accounts.get(i).deposit(sum);
-				
-			}
-			
-		}
 		
-		if (this.getIndex(accountNumber) == -1) 
-		{
-			
-			System.err.println("Bank.deposit(...): " + "There is no account with that number.");
-			
-		}
-		
-	}
-
-	public void withdraw (int accountNumber, double sum) 
-	{
-		
-		for (int i = 0; i < this.accounts.size(); i++) 
-		{
-			
-			if (this.accounts.get(i).getAccountNumber() == accountNumber) 
+			if (numero == 1 || numero == 2 || numero == 3 || numero == 4 || numero == 5 || numero == 6 || numero == 7 || numero == 8) 
 			{
+			
+				if (numero == 1) 
+				{
 				
-				this.accounts.get(i).withdraw(sum);
+					System.out.println("Por favor elija el tipo de cuenta:");
+					System.out.println("1. Cuenta de ahorros");
+					System.out.println("2. Cuenta de corriente");
+					System.out.println("3. Cuenta CDT");
 				
-			}
+					numero = entrada.nextInt();
+					char accountType = 'X';
+				
+					if (numero == 1) 
+					{
+					
+						accountType = 'A';
+					
+					}
+				
+					if (numero == 2) 
+					{
+					
+						accountType = 'C';
+					
+					}
+
+					if (numero == 3) 
+					{
+					
+						accountType = 'T';
+					
+					}
+				
+					System.out.println("Por favor digite el numero de la nueva cuenta:");
+					int accountNumber = entrada.nextInt();
+				
+					bank.openAccount(accountType, accountNumber);
+					
+					numero = 0;
+				
+				}
 			
-		}
-		
-		if (this.getIndex(accountNumber) == -1) 
-		{
+				if (numero == 2) 
+				{
+				
+					System.out.println("Por favor digite el numero de la cuenta que desea cerrar:");
+					int accountNumber = entrada.nextInt();
+				
+					bank.closeAccount(accountNumber);
+					
+					numero = 0;
+				
+				}
 			
-			System.err.println("Bank.withdraw(...): " + "There is no account with that number.");
+				if (numero == 3) 
+				{
+				
+					System.out.println("Por favor digite la cantidad que desea depositar:");
+					double sum = entrada.nextDouble();
+				
+					System.out.println("Por favor digite el numero de cuenta:");
+					int accountNumber = entrada.nextInt();
+				
+					bank.deposit(accountNumber, sum);
+					
+					numero = 0;
+				
+				}
 			
-		}
-		
-	}
-	
-	public double getBalance (int accountNumber) 
-	{
-		
-		double bal = 0;
-		
-		for (int i = 0; i < this.accounts.size(); i++) 
-		{
+				if (numero == 4) 
+				{
+					
+					System.out.println("Por favor digite la cantidad que desea retirar:");
+					double sum = entrada.nextDouble();
+				
+					System.out.println("Por favor digite el numero de cuenta:");
+					int accountNumber = entrada.nextInt();
+				
+					bank.withdraw(accountNumber, sum);
+					
+					numero = 0;
+				
+				}
 			
-			if (this.accounts.get(i).getAccountNumber() == accountNumber) 
+				if (numero == 5) 
+				{
+				
+					System.out.println("Por favor digite el numero de cuenta:");
+					int accountNumber = entrada.nextInt();
+				
+					System.out.println("El balance de la cuenta es: " + bank.getBalance(accountNumber));
+					
+					numero = 0;
+				
+				}
+			
+				if (numero == 6) 
+				{
+				
+					bank.accountInOverdraft();
+					
+					numero = 0;
+				
+				}
+
+				if (numero == 7) 
+				{
+
+					System.out.println("Por favor digite el numero de cuenta:");
+					int accountNumber = entrada.nextInt();
+
+					if (bank.getAccount(accountNumber) instanceof CDT)
+					{
+
+						System.out.println("Por favor digite el numero de dias transcurridos:");
+						int days = entrada.nextInt();
+						System.out.println("La rentabilidad de la cuenta pasados " + days + " dias es: " + ((CDT)bank.getAccount(accountNumber)).calculateProfitability(days));
+
+					} else
+					{
+
+						System.err.println("La cuenta seleccionada no es de tipo CDT.");
+
+					}
+						
+					
+					numero = 0;
+				
+				}
+
+				if (numero == 8) 
+				{
+
+					System.out.println("Por favor digite el numero de dias para el calculo estimado.");
+						int days = entrada.nextInt();
+					bank.estimatedBalanceCDTAccounts(days);
+				
+				}
+				
+				System.out.println("¿Que desea hacer ahora?:");
+				System.out.println("1. Salir");
+				System.out.println("2. Continuar");
+				
+				numero = entrada.nextInt();
+				
+				if (numero == 1) 
+				
+				{
+					
+					parar = true;
+					
+				}
+				
+				if (numero == 2) 
+					
+				{
+					
+					System.out.println("Por favor digite el numero de la opcion que desea realizar:");
+					System.out.println("1. Abrir una cuenta de banco");
+					System.out.println("2. Cerrar una cuenta de banco");
+					System.out.println("3. Realizar un deposito");
+					System.out.println("4. Realizar un retiro");
+					System.out.println("5. Obtener balance de una cuenta");
+					System.out.println("6. Conocer que cuentas se encuentran en sobregiro");
+					System.out.println("7. Calcular rentabilidad (solo cuenta CDT).");
+					System.out.println("8. Calcular rentabilidad de todas las cuentas CDT.");
+					
+					numero = entrada.nextInt();
+					
+				}
+			
+			}else 
+		
 			{
-				
-				bal = accounts.get(i).getBalance();
-				return bal;
-				
+			
+			
+			
 			}
 			
-		}
-		
-		if (this.getIndex(accountNumber) == -1) 
-		{
-			
-			System.err.println("Bank.getBalance(...): " + "There is no account with that number.");
-			
-		}
-		
-		return bal;
-		
-	}
-	
-	public void accountInOverdraft () 
-	{
-		
-		System.out.println("The following account numbers are overdraft: ");
-		
-		for (int i = 0; i < this.accounts.size(); i++) 
-		{
-			
-			if (this.accounts.get(i).getBalance() < 0) 
-			{
-				
-				System.out.println(this.accounts.get(i).getAccountNumber());
-				
 			}
-			
-		}	
 		
-	}
-	
-	public void openAccount (char accountType, int accountNumber) 
-	{
-		
-		if ((accountType == 'A' || accountType == 'C' || accountType == 'T') && this.getIndex(accountNumber) == -1) 
-		{
-		
-			if (accountType == 'A') 
-			{
-				
-				this.accounts.add(new SavingsAccount(accountNumber));
-				
-			}
-			
-			if (accountType == 'C') 
-			{
-				
-				this.accounts.add(new CurrentAccount(accountNumber));
-				
-			}
-
-			if (accountType == 'T') 
-			{
-				
-				this.accounts.add(new CDT(accountNumber));
-				
-			}
-			
-			System.out.println("Successfully opened account");
-			
-		}else 
+		} catch (Exception e) 
 		
 		{
 			
-			System.err.println("Bank.openAccount(...): " + "The account type is invalid or the account already exists.");
 			
 		}
 		
 	}
-	
-	public void closeAccount (int accountNumber) 
-	{
-		
-		if (this.getIndex(accountNumber) == -1) 
-		{
-			
-			System.err.println("Bank.closeAccount(...): " + "There is no account with that number.");
-			
-		}
-		
-		for (int i = 0; i < this.accounts.size(); i++) 
-		{
-			
-			if (this.accounts.get(i).getAccountNumber() == accountNumber) 
-			{
-				
-				System.out.println("Account number " + this.accounts.get(i).getAccountNumber() + " has been closed.");
-				this.accounts.remove(i);
-				
-			}
-			
-		}
-		
-	}
-	
-	private int getIndex (int accountNumber) 
-	{
-		
-		int index = -1;
-		
-		for (int i = 0; i < this.accounts.size(); i++) 
-		{
-			
-			if (this.accounts.get(i).getAccountNumber() == accountNumber) 
-			{
-				
-				index = i;
-				
-			}
-			
-		}
-		
-		return index;
-		
-	}
 
-	public Account getAccount (int accountNumber) 
-	{
-
-		for (int i = 0; i < this.accounts.size(); i++) 
-		{
-
-			if (this.accounts.get(i).getAccountNumber() == accountNumber) {
-
-				return this.accounts.get(i);
-
-			}
-
-		}
-		return null;
-
-	}
-
-	public void estimatedBalanceCDTAccounts (int days) 
-	{
-
-		System.out.println("The estimated balance for the following CDT accounts is: ");
-		
-		for (int i = 0; i < this.accounts.size(); i++) 
-		{
-			
-			if (this.accounts.get(i) instanceof CDT) 
-			{
-				int accountNumber = this.accounts.get(i).getAccountNumber();
-				System.out.println("La cuenta de numero " + accountNumber + ", tiene una rentabilidad estimada de: " + ((CDT)getAccount(accountNumber)).calculateProfitability(days));
-				
-			}
-			
-		}
-
-	}
-	
-	public static Bank getInstance () 
-	{
-		
-		if (instance == null) 
-		{
-			
-			instance = new Bank();
-			
-		}
-		
-		return instance;
-		
-	}
-
-	public ArrayList<Account> getAccounts () 
-	{
-		
-		return accounts;
-		
-	}
-
-	public void setAccounts (ArrayList<Account> accounts) 
-	{
-		
-		this.accounts = accounts;
-		
-	}
-	
 }
