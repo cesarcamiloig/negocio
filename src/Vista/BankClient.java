@@ -34,6 +34,7 @@ public class BankClient {
 		System.out.println("7. Calcular rentabilidad (solo cuenta CDT).");
 		System.out.println("8. Calcular rentabilidad de todas las cuentas CDT.");
 		System.out.println("9. Imprimir numero de cuenta y sus nombres.");
+		System.out.println("10. Imprimir numero de cuenta y su saldo.");
 		
 		try {
 		
@@ -45,7 +46,7 @@ public class BankClient {
 				
 			{
 		
-			if (numero == 1 || numero == 2 || numero == 3 || numero == 4 || numero == 5 || numero == 6 || numero == 7 || numero == 8 || numero == 9) 
+			if (numero == 1 || numero == 2 || numero == 3 || numero == 4 || numero == 5 || numero == 6 || numero == 7 || numero == 8 || numero == 9 || numero == 10) 
 			{
 			
 				if (numero == 1) 
@@ -204,6 +205,14 @@ public class BankClient {
 					numero = 0;
 				
 				}
+
+				if (numero == 10) 
+				{
+
+					bank.imprimirNumeroCuentaYSaldo();
+					numero = 0;
+				
+				}
 				
 				System.out.println("¿Que desea hacer ahora?:");
 				System.out.println("1. Salir");
@@ -232,7 +241,8 @@ public class BankClient {
 					System.out.println("6. Conocer que cuentas se encuentran en sobregiro");
 					System.out.println("7. Calcular rentabilidad (solo cuenta CDT).");
 					System.out.println("8. Calcular rentabilidad de todas las cuentas CDT.");
-					System.out.println("9. Imprimir numero de cuenta y sus nombres.");
+					System.out.println("9. Imprimir numero de cuenta y sus nombres.");			
+					System.out.println("10. Imprimir numero de cuenta y su saldo.");
 					
 					numero = entrada.nextInt();
 					
@@ -242,7 +252,8 @@ public class BankClient {
 		
 			{
 			
-			
+				System.err.println("Opcion incorrecta, vuelva a intentar.");
+				main(null);
 			
 			}
 			
@@ -252,6 +263,8 @@ public class BankClient {
 		
 		{
 			
+			System.err.println("Algo salio mal, por favor intente de nuevo.");
+			main(null);
 			
 		}
 		

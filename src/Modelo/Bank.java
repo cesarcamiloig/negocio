@@ -240,7 +240,20 @@ public class Bank {
 		for (int i = 0; i < this.accounts.size(); i++) 
 		{
 
-			System.out.println("Numero de cuenta y nombre completo: " + this.accounts.get(i).getAccountNumber() + ", " + this.accounts.get(i).getCliente().getNombresApellidos());
+			System.out.println("Numero de cuenta y nombre completo respectivamente: " + this.accounts.get(i).getAccountNumber() + ", " + this.accounts.get(i).getCliente().getNombresApellidos());
+			
+		}
+
+	}
+
+	public void imprimirNumeroCuentaYSaldo () 
+	{
+
+		System.out.println("A continuacion se imprime el numero de cuenta y el saldo de esta.");
+		for (int i = 0; i < this.accounts.size(); i++) 
+		{
+
+			System.out.println("Numero de cuenta y saldo respectivamente: " + this.accounts.get(i).getAccountNumber() + ", " + this.accounts.get(i).getBalance());
 			
 		}
 
