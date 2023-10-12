@@ -2,6 +2,9 @@ package Modelo;
 
 public class Cliente {
 
+    /*
+	 * Funcionalidad F3, asociacion de cliente a una cuenta
+	 */
     private long CC;
     private String nombresApellidos;
 

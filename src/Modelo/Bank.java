@@ -1,8 +1,6 @@
 package Modelo;
 
 import java.util.*;
-import Modelo.Cliente;
-import Modelo.Account;
 
 public class Bank {
 
@@ -233,6 +231,9 @@ public class Bank {
 
 	}
 
+	/*
+	 * Funcionalidad F4 imprimir numero y nombre del cliente de una cuenta de bank;
+	 */
 	public void imprimirNumeroCuentaYNombre () 
 	{
 
@@ -246,6 +247,9 @@ public class Bank {
 
 	}
 
+	/*
+	 * Funcionalidad F2 imprimir numero y saldo de una cuenta de bank;
+	 */
 	public void imprimirNumeroCuentaYSaldo () 
 	{
 

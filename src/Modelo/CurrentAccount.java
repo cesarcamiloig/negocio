@@ -83,6 +83,9 @@ public class CurrentAccount extends Account{
 		
 	}
 
+	/*
+	 * Funcionalidad F1 obtener saldo de una cuenta corriente.
+	 */
 	public double getBalance () 
 	{
 

@@ -25,6 +25,9 @@ package Modelo;
 
     }
 
+    /*
+	 * Funcionalidad F1 obtener saldo de una cuenta CDT
+	 */
     public double getBalance () 
     {
 

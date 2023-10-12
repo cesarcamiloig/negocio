@@ -6,6 +6,9 @@ public class Account {
 	private int accnum; // The account number
 	private Cliente cliente;
 
+	/*
+	 * Funcionalidad F3, asociacion de cliente a una cuenta
+	 */
 	public Account(int a, Cliente cliente) {
 		bal = 0.0;
 		accnum = a;
@@ -26,6 +29,9 @@ public class Account {
 			System.err.println("Account.withdraw(...): " + "cannot withdraw negative amount.");
 	}
 
+	/*
+	 * Funcionalidad F1 obtener saldo de una cuenta
+	 */
 	public double getBalance() {
 		return bal;
 	}
