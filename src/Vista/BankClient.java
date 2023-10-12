@@ -1,9 +1,9 @@
-package vista;
+package Vista;
 
 import java.util.*;
 
-import modelo.Bank;
-import modelo.CDT;
+import Modelo.Bank;
+import Modelo.CDT;
 //import Modelo.Account;
 //import modelo.CurrentAccount;
 
