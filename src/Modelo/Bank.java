@@ -1,6 +1,8 @@
 package Modelo;
 
 import java.util.*;
+import Modelo.Cliente;
+import Modelo.Account;
 
 public class Bank {
 
@@ -110,7 +112,7 @@ public class Bank {
 		
 	}
 	
-	public void openAccount (char accountType, int accountNumber) 
+	public void openAccount (char accountType, int accountNumber, Cliente cliente) 
 	{
 		
 		if ((accountType == 'A' || accountType == 'C' || accountType == 'T') && this.getIndex(accountNumber) == -1) 
@@ -119,21 +121,21 @@ public class Bank {
 			if (accountType == 'A') 
 			{
 				
-				this.accounts.add(new SavingsAccount(accountNumber));
+				this.accounts.add(new SavingsAccount(accountNumber, cliente));
 				
 			}
 			
 			if (accountType == 'C') 
 			{
 				
-				this.accounts.add(new CurrentAccount(accountNumber));
+				this.accounts.add(new CurrentAccount(accountNumber, cliente));
 				
 			}
 
 			if (accountType == 'T') 
 			{
 				
-				this.accounts.add(new CDT(accountNumber));
+				this.accounts.add(new CDT(accountNumber, cliente));
 				
 			}
 			
@@ -226,6 +228,19 @@ public class Bank {
 				System.out.println("La cuenta de numero " + accountNumber + ", tiene una rentabilidad estimada de: " + ((CDT)getAccount(accountNumber)).calculateProfitability(days));
 				
 			}
+			
+		}
+
+	}
+
+	public void imprimirNumeroCuentaYNombre () 
+	{
+
+		System.out.println("A continuacion se imprime el numero de cuenta y nombre del cliente asociado a esta.");
+		for (int i = 0; i < this.accounts.size(); i++) 
+		{
+
+			System.out.println("Numero de cuenta y nombre completo: " + this.accounts.get(i).getAccountNumber() + ", " + this.accounts.get(i).getCliente().getNombresApellidos());
 			
 		}
 

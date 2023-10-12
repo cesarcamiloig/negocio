@@ -4,10 +4,10 @@ package Modelo;
 
 
     //public void deposit () {}
-    public CDT (int a) 
+    public CDT (int a, Cliente cliente) 
     {
 
-        super(a);
+        super(a, cliente);
 
     }
 
@@ -21,7 +21,14 @@ package Modelo;
     public double calculateProfitability (int days) 
     {
 
-        return this.getBalance() + ((this.getBalance() * 0.01) * days);
+        return super.getBalance() + ((super.getBalance() * 0.01) * days);
+
+    }
+
+    public double getBalance () 
+    {
+
+        return this.calculateProfitability(10);
 
     }
 

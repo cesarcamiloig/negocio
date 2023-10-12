@@ -4,6 +4,7 @@ import java.util.*;
 
 import Modelo.Bank;
 import Modelo.CDT;
+import Modelo.Cliente;
 //import Modelo.Account;
 //import modelo.CurrentAccount;
 public class BankClient {
@@ -32,6 +33,7 @@ public class BankClient {
 		System.out.println("6. Conocer que cuentas se encuentran en sobregiro");
 		System.out.println("7. Calcular rentabilidad (solo cuenta CDT).");
 		System.out.println("8. Calcular rentabilidad de todas las cuentas CDT.");
+		System.out.println("9. Imprimir numero de cuenta y sus nombres.");
 		
 		try {
 		
@@ -43,7 +45,7 @@ public class BankClient {
 				
 			{
 		
-			if (numero == 1 || numero == 2 || numero == 3 || numero == 4 || numero == 5 || numero == 6 || numero == 7 || numero == 8) 
+			if (numero == 1 || numero == 2 || numero == 3 || numero == 4 || numero == 5 || numero == 6 || numero == 7 || numero == 8 || numero == 9) 
 			{
 			
 				if (numero == 1) 
@@ -78,10 +80,20 @@ public class BankClient {
 					
 					}
 				
+					
+
 					System.out.println("Por favor digite el numero de la nueva cuenta:");
 					int accountNumber = entrada.nextInt();
+
+					System.out.println("Por favor digite el numero de cedula:");
+					long CC = entrada.nextLong();	
+
+					String saltoDeLinea = entrada.nextLine();
+					
+					System.out.println("Por favor digite nombres y apellidos del cliente:");
+					String nombresApellidos = entrada.nextLine();
 				
-					bank.openAccount(accountType, accountNumber);
+					bank.openAccount(accountType, accountNumber, new Cliente(CC, nombresApellidos));
 					
 					numero = 0;
 				
@@ -181,6 +193,15 @@ public class BankClient {
 					System.out.println("Por favor digite el numero de dias para el calculo estimado.");
 						int days = entrada.nextInt();
 					bank.estimatedBalanceCDTAccounts(days);
+					numero = 0;
+				
+				}
+
+				if (numero == 9) 
+				{
+
+					bank.imprimirNumeroCuentaYNombre();
+					numero = 0;
 				
 				}
 				
@@ -211,6 +232,7 @@ public class BankClient {
 					System.out.println("6. Conocer que cuentas se encuentran en sobregiro");
 					System.out.println("7. Calcular rentabilidad (solo cuenta CDT).");
 					System.out.println("8. Calcular rentabilidad de todas las cuentas CDT.");
+					System.out.println("9. Imprimir numero de cuenta y sus nombres.");
 					
 					numero = entrada.nextInt();
 					

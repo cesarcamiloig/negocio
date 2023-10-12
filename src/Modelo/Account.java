@@ -4,10 +4,12 @@ public class Account {
 
 	private double bal; // The current balance
 	private int accnum; // The account number
+	private Cliente cliente;
 
-	public Account(int a) {
+	public Account(int a, Cliente cliente) {
 		bal = 0.0;
 		accnum = a;
+		this.cliente = cliente;
 	}
 
 	public void deposit(double sum) {
@@ -32,6 +34,10 @@ public class Account {
 		return accnum;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
 	public String toString() {
 		return "Acc " + accnum + ": " + "balance = " + bal;
 	}
@@ -41,5 +47,5 @@ public class Account {
 		// override the toString method
 		System.out.println(toString());
 	}
-	
+
 }

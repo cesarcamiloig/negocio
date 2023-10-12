@@ -4,10 +4,10 @@ public class CurrentAccount extends Account{
 	
 	private double overdraftLimit;
 	
-	public CurrentAccount (int a) 
+	public CurrentAccount (int a, Cliente cliente) 
 	{
 		
-		super(a);
+		super(a, cliente);
 		this.overdraftLimit = 1000;
 		
 	}
@@ -15,7 +15,7 @@ public class CurrentAccount extends Account{
 	public void deposit (double sum) 
 	{
 		
-		if (this.getBalance() + sum >= 0) 
+		if (super.getBalance() + sum >= 0) 
 		{
 			
 			this.overdraftLimit = 1000;
@@ -29,17 +29,17 @@ public class CurrentAccount extends Account{
 	public void withdraw (double sum) 
 	{
 		
-		if (this.getBalance() >= 0) 
+		if (super.getBalance() >= 0) 
 		{
 			
-			if ((this.getBalance() + this.overdraftLimit) - sum >= 0) 
+			if ((super.getBalance() + this.overdraftLimit) - sum >= 0) 
 			{
 				//this.overdraftLimit -= this.getBalance() - sum < 0 ? this.getBalance() - sum: 0;
 
-				if (this.getBalance() - sum < 0) 
+				if (super.getBalance() - sum < 0) 
 				{
 
-					this.overdraftLimit = this.overdraftLimit + (this.getBalance() - sum);
+					this.overdraftLimit = this.overdraftLimit + (super.getBalance() - sum);
 
 				}
 				else
@@ -81,6 +81,13 @@ public class CurrentAccount extends Account{
 			
 		}
 		
+	}
+
+	public double getBalance () 
+	{
+
+		return super.getBalance() + this.overdraftLimit;
+
 	}
 
 }
