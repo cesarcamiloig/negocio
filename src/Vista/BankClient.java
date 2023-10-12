@@ -6,11 +6,12 @@ import Modelo.Bank;
 import Modelo.CDT;
 //import Modelo.Account;
 //import modelo.CurrentAccount;
-
 public class BankClient {
 
 	public static void main (String []args) 
 	{
+
+		int a = 0;
 		
 		Bank bank = Bank.getInstance();
 		
